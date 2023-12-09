@@ -1,0 +1,54 @@
+{
+    "name": "samuelirwin/logger",
+    "description": "This is a wrapper package to create standard logging information for better debugging",
+    "keywords": [
+        "samuelirwin",
+        "logger"
+    ],
+    "homepage": "https://github.com/samuelirwin/logger",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Samuel Irwin",
+            "email": "samuelirwin1992@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.4|^8.0",
+        "illuminate/support": "^8.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.0",
+        "phpunit/phpunit": "^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Samuelirwin\\Logger\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Samuelirwin\\Logger\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Samuelirwin\\Logger\\LoggerServiceProvider"
+            ],
+            "aliases": {
+                "Logger": "Samuelirwin\\Logger\\LoggerFacade"
+            }
+        }
+    }
+}
