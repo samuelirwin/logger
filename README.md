@@ -1,10 +1,8 @@
-# Very short description of the package
+# This is a wrapper log to provide consistent log information during development
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/samuelirwin/logger.svg?style=flat-square)](https://packagist.org/packages/samuelirwin/logger)
 [![Total Downloads](https://img.shields.io/packagist/dt/samuelirwin/logger.svg?style=flat-square)](https://packagist.org/packages/samuelirwin/logger)
 ![GitHub Actions](https://github.com/samuelirwin/logger/actions/workflows/main.yml/badge.svg)
-
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
 
 ## Installation
 
@@ -16,9 +14,62 @@ composer require samuelirwin/logger
 
 ## Usage
 
+| Parameters | Type   | Description |
+|------------|--------|-------------|
+| $class     | object | Required    |
+| $method    | string | Required    |
+| $logType   | string | Required    |
+| $summary   | string | Required    |
+| $details   | array  | Optional    |
+
 ```php
-// Usage description here
+Logger::record(object $class, string $method, string $logType, string $summary, array $details = [])
 ```
+
+Example
+```php
+You can use $this in a class to get the class object
+
+class Foo {
+    public function bar()
+    {
+        Logger::record(
+            $this, // class object
+            'bar', // name of the method
+            'error', // log types; $allowedLogTypes = ['emergency', 'alert', 'critical', 'error', 'warning', 'notice', 'info', 'debug'];
+            'Summary of error message', 
+            [
+                // inside here can be anything you want to log
+                'detail-1' => 1,
+                'detail-2' => 'new details',
+                'details-3' => 'more details'
+            ]);
+    }
+}
+```
+
+Result Output
+```php
+{
+    "context": "ClassName::methodName",
+    "location": "/path/to/file",
+    "details": {
+        "id": 1,
+        "code": 444,
+        "message": "exception message"
+    }
+}
+```
+
+| Allowed Log Types |
+|-------------------|
+| emergency         |
+| alert             |
+| error             |
+| warning           |
+| notice            |
+| info              |
+| debug             |
 
 ### Testing
 
